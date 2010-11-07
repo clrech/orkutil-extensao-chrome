@@ -137,6 +137,9 @@
 	"mensagens" : {
 		"message" : "Mensajes"
 	},
+	"meus_amigos" : {
+		"message" : "Mis amigos"
+	},
 	"navegacao" : {
 		"message" : "Navegación"
 	},
@@ -160,6 +163,15 @@
 	},
 	"tela_cheia" : {
 		"message" : "Pantalla completa"
+	},
+	"topicos" : {
+		"message" : "Temas"
+	},
+	"tudo" : {
+		"message" : "Todo"
+	},
+	"usuarios" : {
+		"message" : "Usuarios"
 	},
 	"videos" : {
 		"message" : "Vídeos"
