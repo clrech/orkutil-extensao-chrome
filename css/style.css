@@ -1,0 +1,27 @@
+body {
+	font-family: Verdana;
+}
+h1.aniversarios {
+	background-image: url('../imagens/aniversarios.png');
+	background-position: 0% 50%;
+	background-repeat: no-repeat;
+	color: #C01195;
+	font-size: 140%;
+	padding: 0 10px;
+	text-align: center;
+	text-shadow: #FFC0F3 1px 1px 9px;
+}
+iframe.aniversarios {
+	border: 0;
+	height: 350px;
+	width: 400px;
+}
+.adicionar-agenda {
+	background-image: url('../imagens/icones/agenda.ico');
+	background-position: 0% 50%;
+	background-repeat: no-repeat;
+	color: #0055AB;
+	float: right;
+	padding-left: 20px;
+	text-decoration: none;
+}

@@ -1,0 +1,105 @@
+.zoom {
+	cursor: pointer;
+	float: right;
+	height: 16px;
+	margin-left: 5px;
+	width: 16px;
+}
+.tela-cheia {
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+.stream-selecionada {
+	background-color: #FFFDDD !important;
+	border: 1px solid #FF9212 !important;
+	-webkit-box-shadow: #FF9212 0px 0px 8px;
+}
+#atalhos {
+	background: rgba(0, 0, 0, 0.398438);
+	font-size: 13px;
+	height: 100%;
+	left: 0px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 9999;
+}
+#atalhos > div {
+	background-color: #000;
+	border-radius: 10px;
+	height: 380px;
+	margin: auto;
+	width: 500px;
+}
+#atalhos > div > div {
+	background-color: #FFF;
+	border-radius: 5px;
+	margin: 5px;
+	padding-bottom: 5px;
+}
+#atalhos .atalhos {
+	border-right: 1px solid #EEE;
+	float: left;
+	margin-top: 5px;
+	padding-left: 30px;
+	width: 214px;
+}
+#atalhos .atalhos:first {
+	border-right: 1px solid #EEE;
+}
+#atalhos h3 {
+	color: #FFF;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 5px;
+	padding-top: 12px;
+	text-align: center;
+}
+#atalhos h4 {
+	font-weight: bold;
+	text-align: center;
+	text-decoration: underline;
+}
+#atalhos dl {
+	margin: 5px 0;
+}
+#atalhos dt {
+	display: inline-block;
+	font-weight: bold;
+	width: 35px;
+}
+#atalhos dd {
+	display: inline-block;
+	margin-left: 15px;
+}
+#atalhos .fechar-modal {
+	background: none;
+	cursor: pointer;
+	color: white;
+	float: right;
+	font-size: 20px;
+	margin-left: 0;
+	margin-right: 15px;
+}
+.miniatura-maior div[style*=overflow] > div > div > div > div > div > div > div {
+	height: 169px !important;
+	width: 164px !important;
+}
+.miniatura-maior a[href*=Profile] {
+	width: 144px !important;
+}
+.miniatura-maior a[href*=Profile] img:first {
+	height: 128px !important;
+	width: 128px !important;
+}
+.miniatura-maior a[href*=Profile] > div {
+	height: 128px !important;
+	width: 128px !important;
+}
+.miniatura-maior a[href*=Profile] > div + div {
+	top: 134px !important;
+	width: 144px !important;
+}
