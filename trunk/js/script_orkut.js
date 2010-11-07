@@ -25,7 +25,7 @@ orkutil.carregar = function() {
 			log('orkutil.carregar(): Criando imagem de zoom-in nas miniaturas');
 			$(document.createElement('img')).attr( {
 				class : 'zoom',
-				src : chrome.extension.getURL('imagens/icones/zoom-in.png'),
+				src : chrome.extension.getURL('img/icones/zoom-in.png'),
 				title : chrome.i18n.getMessage('aumentar_fotos')
 			}).prependTo($(elemento).find('.themePrimaryBackgroundColor')).click( {
 				caixa : elemento
@@ -39,7 +39,7 @@ orkutil.carregar = function() {
 			log('orkutil.carregar(): Criando imagem de zoom-out nas miniaturas');
 			$(document.createElement('img')).attr( {
 				class : 'zoom',
-				src : chrome.extension.getURL('imagens/icones/zoom-out.png'),
+				src : chrome.extension.getURL('img/icones/zoom-out.png'),
 				title : chrome.i18n.getMessage('diminuir_fotos')
 			}).prependTo($(elemento).find('.themePrimaryBackgroundColor')).click(orkutil.diminuirMiniaturas);
 		}
@@ -47,7 +47,7 @@ orkutil.carregar = function() {
 		log('orkutil.carregar(): Criando imagem de tela cheia');
 		$(document.createElement('img')).attr( {
 			class : 'zoom',
-			src : chrome.extension.getURL('imagens/icones/tela-cheia.png'),
+			src : chrome.extension.getURL('img/icones/tela-cheia.png'),
 			title : chrome.i18n.getMessage('tela_cheia')
 		}).prependTo($(elemento).find('.themePrimaryBackgroundColor')).click( {
 			caixa : elemento
@@ -224,6 +224,11 @@ orkutil.resize = function() {
 
 orkutil.onpopstate = function(event) {
 	log('orkutil.onpopstate()');
+
+	$('.tela-cheia input[class][type=text]:first').blur();
+	$('.tela-cheia div[style*=overflow]').height(orkutil.alturaCaixa);
+	$('.tela-cheia').removeClass('tela-cheia');
+
 	window.setTimeout(orkutil.verificarTamanhoMiniaturas, 3000);
 	if ($('.stream-selecionada').size() == 0) {
 		$('.demoStream div > div:first').addClass('stream-selecionada');
