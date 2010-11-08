@@ -4,12 +4,13 @@ var orkutil = {
 	alturaCaixa : 0,
 	teclaG : 0,
 	scroll : 9999999999999,
+	notificado : false,
 	atalho : {},
 	atalhos : [ [ 'aplicativos', 'AppDirectory', 'paginas' ], [ 'comunidades', 'Communities', 'paginas' ], [ 'depoimentos', 'ProfileT', 'paginas' ], [ 'eventos', 'Events', 'paginas' ],
 			[ 'fotos', 'AlbumList', 'paginas' ], [ 'fotos_junto', 'PhotoTag', 'paginas' ], [ 'grupos', 'GroupsManagement', 'paginas' ], [ 'home', 'Home', 'paginas' ],
 			[ 'mensagens', 'Messages', 'paginas' ], [ 'configuracoes', 'GeneralSettings', 'paginas' ], [ 'perfil', 'Profile', 'paginas' ], [ 'promova', 'Promote', 'paginas' ],
 			[ 'recados', 'Scrapbook', 'paginas' ], [ 'perfil_completo', 'FullProfile', 'paginas' ], [ 'proximo', '', 'navegacao' ], [ 'anterior', '', 'navegacao' ], [ 'ajuda', '', 'navegacao' ],
-			[ 'buscar', '', 'navegacao' ] ]
+			[ '.', '', 'atualizar_topo' ] ]
 };
 
 for (i in orkutil.atalhos) {
@@ -54,6 +55,18 @@ orkutil.carregar = function() {
 		}, orkutil.telaCheia);
 	});
 
+	$('.themeDesktopColor').scroll(function() {
+		var docViewTop = $('.themeDesktopColor').scrollTop();
+		var docViewBottom = docViewTop + $('.themeDesktopColor').height();
+
+		var elemTop = $($($('.demoStream > div')[1])).offset().top;
+		var elemBottom = elemTop + $($($('.demoStream > div')[1])).height();
+
+		if ((elemBottom >= docViewTop) && (elemTop <= docViewBottom)) {
+			orkutil.carregarMaisAtualizacoes();
+		}
+	});
+
 	$('.demoStream div > div:visible:first').addClass('stream-selecionada');
 };
 
@@ -66,6 +79,70 @@ orkutil.carregou = function() {
 	}
 };
 
+orkutil.acao = function(acao) {
+	log('chrome.extension.sendRequest( { acao : "' + acao + '" } );');
+	chrome.extension.sendRequest( {
+		'acao' : acao
+	});
+};
+
+orkutil.carregarAtualizacoes = function() {
+	log('orkutil.carregarAtualizacoes()');
+	orkutil.acao('carregarAtualizacoes');
+};
+
+orkutil.carregarMaisAtualizacoes = function() {
+	log('orkutil.carregarMaisAtualizacoes();');
+	orkutil.acao('carregarMaisAtualizacoes');
+};
+
+orkutil.irParaTopo = function() {
+	$('.themeDesktopColor').animate( {
+		scrollTop : $('.demoStream > a').attr('offsetTop')
+	}, 0);
+
+	window.setTimeout(function() {
+		$('stream-selecionada').removeClass('stream-selecionada');
+		$('.demoStream div > div:visible:first').addClass('stream-selecionada');
+	}, 2000);
+};
+
+orkutil.irParaNovasAtualizacoes = function() {
+	log('orkut.irParaNovasAtualizacoes()');
+	$('.themeDesktopColor').animate( {
+		scrollTop : $('.demoStream > a').attr('offsetTop')
+	}, 0);
+
+	orkutil.carregarAtualizacoes();
+	orkutil.irParaTopo();
+};
+
+orkutil.verificarAtualizacoes = function() {
+	log('orkutil.verificarAtualizacoes()');
+	if ($('.demoStream > a').is(':visible')) {
+		if ($('.themeDesktopColor').scrollTop() > 400) {
+			$('.demoStream > a').addClass('novas-atualizacoes');
+			$('.demoStream > a').click(function() {
+				$('.demoStream > a').removeClass('novas-atualizacoes');
+				orkutil.irParaTopo();
+				orkutil.notificado = false;
+			});
+		}
+
+		log('orkutil.notificado=' + orkutil.notificado);
+		if (!orkutil.notificado) {
+			log('chamando notificacao');
+			orkutil.acao('notificarAtualizacoes');
+			orkutil.notificado = true;
+		}
+	} else {
+		$('.demoStream > a').removeClass('novas-atualizacoes');
+	}
+
+	window.setTimeout(orkutil.verificarAtualizacoes, 2000);
+};
+
+window.setTimeout(orkutil.verificarAtualizacoes, 2000);
 window.setTimeout(orkutil.carregou, 1000);
 
 orkutil.telaCheia = function(evento) {
@@ -83,7 +160,7 @@ orkutil.telaCheia = function(evento) {
 			$(elemento).height(orkutil.alturaCaixa);
 		} else {
 			orkutil.alturaCaixa = $(elemento).height();
-			$(elemento).height($(document).height() - 65);
+			$(elemento).height($(document).height() - 87);
 		}
 
 		if (!telaCheia) {
@@ -98,6 +175,7 @@ orkutil.telaCheia = function(evento) {
 
 	$('.tela-cheia input[class][type=text]:first').focus().select();
 	orkutil.verificarTamanhoMiniaturas(false);
+	_gaq.push( [ '_trackEvent', 'Botões', 'clicked', 'Tela cheia' ]);
 };
 
 orkutil.aumentarMiniaturas = function() {
@@ -107,12 +185,14 @@ orkutil.aumentarMiniaturas = function() {
 		window.setTimeout(orkutil.verificarTamanhoMiniaturas, 2000);
 	});
 	orkutil.mudarTamanhoMiniaturas('small', 'medium');
+	_gaq.push( [ '_trackEvent', 'Botões', 'clicked', 'Aumentar miniaturas' ]);
 }
 
 orkutil.diminuirMiniaturas = function() {
 	log('orkutil.diminuirMiniaturas()');
 	orkutil.mudarTamanhoMiniaturas('medium', 'small');
 	$('.miniatura-maior').removeClass('miniatura-maior');
+	_gaq.push( [ '_trackEvent', 'Botões', 'clicked', 'Diminuir miniaturas' ]);
 }
 
 orkutil.mudarTamanhoMiniaturas = function(antes, depois) {
@@ -190,6 +270,9 @@ orkutil.keypress = function(evento) {
 	case 'K':
 		orkutil.navegar(false);
 		break;
+	case '.':
+		orkutil.irParaNovasAtualizacoes();
+		break;
 	}
 };
 
@@ -253,14 +336,14 @@ orkutil.exibirAtalhos = function() {
 	_atalhos.push('<div>');
 
 	for ( var i in orkutil.atalhos) {
-		var tecla = chrome.i18n.getMessage('atalho_' + orkutil.atalhos[i][0]);
+		var tecla = chrome.i18n.getMessage('atalho_' + orkutil.atalhos[i][0]).toLowerCase();
 		var descricao = chrome.i18n.getMessage(orkutil.atalhos[i][0]);
 		descricao = descricao.toLowerCase().replace(tecla.toLowerCase(), '<u>' + tecla + '</u>');
 		descricao = descricao[0].toUpperCase() + descricao.substr(1, descricao.length);
 
 		var temp = [];
 		temp.push('<dl>');
-		temp.push('<dt>' + ((orkutil.atalhos[i][2] == 'paginas') ? 'G + ' : '') + tecla + '</dt>');
+		temp.push('<dt>' + ((orkutil.atalhos[i][2] == 'paginas') ? 'g + ' : '') + tecla + '</dt>');
 		temp.push('<dd>' + descricao + '</dd>');
 		temp.push('</dl>');
 
@@ -283,6 +366,10 @@ orkutil.exibirAtalhos = function() {
 
 	$('#atalhos > div').css('backgroundColor', $('.themePrimaryBackgroundColor:first').css('backgroundColor'));
 	$('#atalhos > div').css('marginTop', (($(window).height() - $('#atalhos > div').height()) / 2) + 'px');
+	alert('puxando...');
+	_gaq.push( [ '_trackEvent', 'Atalhos', 'clicked', 'Exibir' ]);
+	alert(_gaq);
+	console.log(_gaq);
 };
 
 $(window).resize(orkutil.resize);
