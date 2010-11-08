@@ -86,6 +86,9 @@
 	"atualizacoes" : {
 		"message" : "Atualizações"
 	},
+	"atualizar_topo" : {
+		"message" : "Atualizar e ir para o topo"
+	},
 	"atalhos" : {
 		"message" : "Atalhos"
 	},
@@ -94,6 +97,9 @@
 	},
 	"buscar" : {
 		"message" : "Buscar"
+	},
+	"buscar_orkut" : {
+		"message" : "Buscar no orkut"
 	},
 	"comunidades" : {
 		"message" : "Comunidades"
@@ -142,6 +148,12 @@
 	},
 	"navegacao" : {
 		"message" : "Navegação"
+	},
+	"novas_atualizacoes" : {
+		"message" : "Novas atualizações"
+	},
+	"notificacao_novas_atualizacoes" : {
+		"message" : "Você tem novas atualizações no orkut"
 	},
 	"paginas" : {
 		"message" : "Páginas"

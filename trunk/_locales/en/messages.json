@@ -83,6 +83,9 @@
 	"atalho_videos" : {
 		"message" : "V"
 	},
+	"atualizar_topo" : {
+		"message" : "Refresh and go to top"
+	},
 	"atualizacoes" : {
 		"message" : "Updates"
 	},
@@ -94,6 +97,9 @@
 	},
 	"buscar" : {
 		"message" : "Search"
+	},
+	"buscar_orkut" : {
+		"message" : "Search orkut"
 	},
 	"comunidades" : {
 		"message" : "Communities"
@@ -142,6 +148,12 @@
 	},
 	"navegacao" : {
 		"message" : "Navigation"
+	},
+	"novas_atualizacoes" : {
+		"message" : "More updates"
+	},
+	"notificacao_novas_atualizacoes" : {
+		"message" : "You have more updates in orkut"
 	},
 	"paginas" : {
 		"message" : "Pages"

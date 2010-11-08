@@ -12,6 +12,9 @@
 	width: 100%;
 	z-index: 1000;
 }
+.tela-cheia .themePrimaryBackgroundColor {
+	padding-top: 22px;
+}
 .stream-selecionada {
 	background-color: #FFFDDD !important;
 	border: 1px solid #FF9212 !important;
@@ -102,4 +105,13 @@
 .miniatura-maior a[href*=Profile] > div + div {
 	top: 134px !important;
 	width: 144px !important;
+}
+.novas-atualizacoes {
+	border: 1px solid #3767BE;
+	padding: 0 10px;
+	position: fixed;
+	right: 18px;
+	text-decoration: none;
+	top: 0px;
+	z-index: 1000;
 }

@@ -1,19 +1,19 @@
 body {
 	font-family: Verdana;
+	margin: 5px;
 }
 h1.aniversarios {
 	background-image: url('../img/aniversarios.png');
 	background-position: 0% 50%;
 	background-repeat: no-repeat;
 	color: #C01195;
-	font-size: 140%;
-	padding: 0 40px;
-	text-shadow: #FFC0F3 1px 1px 9px;
+	font-size: 110%;
+	padding: 0 30px;
 }
 iframe.aniversarios {
 	border: 0;
 	height: 320px;
-	width: 400px;
+	width: 500px;
 }
 .adicionar-agenda {
 	background-image: url('../img/icones/agenda.ico');
@@ -26,9 +26,6 @@ iframe.aniversarios {
 	padding-left: 20px;
 	text-decoration: none;
 }
-#buscar {
-	margin-top: 50px;
-}
 #buscar input[type=text] {
 	background-image: url('../img/icones/buscar.gif');
 	background-position: 0% 50%;
@@ -36,6 +33,7 @@ iframe.aniversarios {
 	border: 1px solid #CCC;
 	color: #999;
 	padding-left: 20px;
+	width: 330px;
 }
 #buscar input[type=submit] {
 	background: -webkit-gradient(linear, 0% 100%, 0% 0%, color-stop(0.03, #CBCBCB), to(#FDFDFD));
@@ -47,29 +45,13 @@ iframe.aniversarios {
 }
 #buscar input[type=radio] {
 	float: left;
-	margin: 0 10px 0 0;
+	margin: 0;
 }
 #buscar label {
-	background-position: 0 50%;
-	background-repeat: no-repeat;
+	float: left;
 	color: #3767BE;
 	font-size: 12px;
-	padding: 5px 0 5px 20px;
-}
-#buscar label[for=tudo] {
-	background-image: url('../img/icones/buscar_tudo.png');
-}
-#buscar label[for=usuarios] {
-	background-image: url('../img/icones/buscar_usuarios.png');
-}
-#buscar label[for=comunidades] {
-	background-image: url('../img/icones/buscar_comunidades.png');
-}
-#buscar label[for=topicos] {
-	background-image: url('../img/icones/buscar_topicos.png');
-}
-#buscar label[for=amigos] {
-	background-image: url('../img/icones/buscar_amigos.png');
+	padding: 0 10px 0 5px;
 }
 #buscar p {
 	margin: 5px 0px;

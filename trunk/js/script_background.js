@@ -89,6 +89,51 @@ for ( var menu in orkutil.menus) {
 
 log(orkutil);
 
+orkutil.clicar = function(elemento) {
+	var codigo = 'var evt = document.createEvent("MouseEvents");';
+	codigo += 'evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);';
+	codigo += 'var r = ' + elemento + '.dispatchEvent(evt);';
+
+	return codigo;
+}
+
+chrome.extension.onRequest.addListener(function(requisicao, remetente, resposta) {
+	log('chrome.extension.onRequest()');
+	log(requisicao);
+	log(remetente);
+
+	if (!requisicao.acao) {
+		return;
+	}
+
+	switch (requisicao.acao) {
+	case 'carregarAtualizacoes':
+		chrome.tabs.executeScript(null, {
+			code : orkutil.clicar('document.getElementsByClassName("demoStream")[0].childNodes[0]');
+			_gaq.push( [ '_trackEvent', 'Botões', 'clicked', 'Carregar atualizações');
+		});
+		break;
+
+	case 'carregarMaisAtualizacoes':
+		chrome.tabs.executeScript(null, {
+			code : orkutil.clicar('document.getElementsByClassName("demoStream")[0].childNodes[2]');
+		});
+		break;
+
+	case 'notificarAtualizacoes':
+		chrome.windows.getCurrent(function(janela) {
+			chrome.tabs.getSelected(janela.id, function(aba) {
+				if (remetente.tab.id != aba.id) {
+					window.webkitNotifications.createNotification('img/icones/icone-48.png', chrome.i18n.getMessage('novas_atualizacoes'), chrome.i18n.getMessage('notificacao_novas_atualizacoes')).show();
+				}
+			});
+		});
+		break;
+	}
+
+	resposta( {});
+});
+
 function log(s) {
 	if (orkutil.log) {
 		console.log(s);
