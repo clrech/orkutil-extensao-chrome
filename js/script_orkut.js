@@ -366,10 +366,7 @@ orkutil.exibirAtalhos = function() {
 
 	$('#atalhos > div').css('backgroundColor', $('.themePrimaryBackgroundColor:first').css('backgroundColor'));
 	$('#atalhos > div').css('marginTop', (($(window).height() - $('#atalhos > div').height()) / 2) + 'px');
-	alert('puxando...');
 	_gaq.push( [ '_trackEvent', 'Atalhos', 'clicked', 'Exibir' ]);
-	alert(_gaq);
-	console.log(_gaq);
 };
 
 $(window).resize(orkutil.resize);
