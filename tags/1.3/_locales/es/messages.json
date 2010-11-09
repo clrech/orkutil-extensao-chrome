@@ -1,0 +1,191 @@
+{
+	"titulo" : {
+		"message" : "Orkutil"
+	},
+	"descricao" : {
+		"message" : "Mejora de la navegación en orkut, con atajos de teclado, menús contextuales y exibición de la lista de amigos y comunidades en pantalla completa."
+	},
+	"adicionar_aniversarios_agenda" : {
+		"message" : "Añadir a Google Calendar"
+	},
+	"ajuda" : {
+		"message" : "Ayuda"
+	},
+	"anterior" : {
+		"message" : "Anterior"
+	},
+	"aplicativos" : {
+		"message" : "Aplicaciones"
+	},
+	"amigos" : {
+		"message" : "Amigos"
+	},
+	"aniversarios" : {
+		"message" : "Cumpleaños"
+	},
+	"amigos_comum" : {
+		"message" : "Amigos comunes"
+	},
+	"atalho_anterior" : {
+		"message" : "K"
+	},
+	"atalho_ajuda" : {
+		"message" : "?"
+	},
+	"atalho_aplicativos" : {
+		"message" : "A"
+	},
+	"atalho_buscar" : {
+		"message" : "/"
+	},
+	"atalho_comunidades" : {
+		"message" : "C"
+	},
+	"atalho_configuracoes" : {
+		"message" : "O"
+	},
+	"atalho_depoimentos" : {
+		"message" : "D"
+	},
+	"atalho_eventos" : {
+		"message" : "E"
+	},
+	"atalho_fotos" : {
+		"message" : "F"
+	},
+	"atalho_fotos_junto" : {
+		"message" : "N"
+	},
+	"atalho_grupos" : {
+		"message" : "G"
+	},
+	"atalho_home" : {
+		"message" : "H"
+	},
+	"atalho_mensagens" : {
+		"message" : "M"
+	},
+	"atalho_perfil" : {
+		"message" : "P"
+	},
+	"atalho_perfil_completo" : {
+		"message" : "U"
+	},
+	"atalho_promova" : {
+		"message" : "R"
+	},
+	"atalho_proximo" : {
+		"message" : "J"
+	},
+	"atalho_recados" : {
+		"message" : "S"
+	},
+	"atalho_videos" : {
+		"message" : "V"
+	},
+	"atualizacoes" : {
+		"message" : "Actualizaciones"
+	},
+	"atualizar_topo" : {
+		"message" : "Actualizar e subir"
+	},
+	"atalhos" : {
+		"message" : "Atajos "
+	},
+	"aumentar_fotos" : {
+		"message" : "Ampliar fotos"
+	},
+	"buscar" : {
+		"message" : "Buscar"
+	},
+	"buscar_orkut" : {
+		"message" : "Buscar en orkut"
+	},
+	"comunidades" : {
+		"message" : "Comunidades"
+	},
+	"comunidades_comum" : {
+		"message" : "Comunidades comunes"
+	},
+	"configuracoes" : {
+		"message" : "Configuración"
+	},
+	"depoimentos" : {
+		"message" : "Testimonios"
+	},
+	"diminuir_fotos" : {
+		"message" : "Reducir fotos"
+	},
+	"enviar_mensagem" : {
+		"message" : "Redactar mensajes"
+	},
+	"enviar_cantada" : {
+		"message" : "Enviar nota seductora"
+	},
+	"eventos" : {
+		"message" : "Eventos"
+	},
+	"fechar" : {
+		"message" : "Cerrar"
+	},
+	"fotos" : {
+		"message" : "Fotos"
+	},
+	"fotos_junto" : {
+		"message" : "Fotos juntos"
+	},
+	"grupos" : {
+		"message" : "Grupos"
+	},
+	"home" : {
+		"message" : "Página principal"
+	},
+	"mensagens" : {
+		"message" : "Mensajes"
+	},
+	"meus_amigos" : {
+		"message" : "Mis amigos"
+	},
+	"navegacao" : {
+		"message" : "Navegación"
+	},
+	"novas_atualizacoes" : {
+		"message" : "Más actualizaciones"
+	},
+	"notificacao_novas_atualizacoes" : {
+		"message" : "Tienes más actualizaciones en orkut"
+	},
+	"paginas" : {
+		"message" : "Páginas"
+	},
+	"perfil" : {
+		"message" : "Perfil"
+	},
+	"promova" : {
+		"message" : "Promocionar"
+	},
+	"proximo" : {
+		"message" : "Siguiente"
+	},
+	"recados" : {
+		"message" : "Mensajes del bloc de notas"
+	},
+	"perfil_completo" : {
+		"message" : "Perfil completo"
+	},
+	"tela_cheia" : {
+		"message" : "Pantalla completa"
+	},
+	"topicos" : {
+		"message" : "Temas"
+	},
+	"tudo" : {
+		"message" : "Todo"
+	},
+	"usuarios" : {
+		"message" : "Usuarios"
+	},
+	"videos" : {
+		"message" : "Vídeos"
+	}
+}

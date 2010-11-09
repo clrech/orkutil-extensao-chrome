@@ -1,0 +1,39 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/script_popup.js"></script>
+</head>
+<body id="popup">
+	<script type="text/javascript" src="js/analytics.js"></script>
+	
+	<form id="buscar">
+		<input class="buscar" name="q" type="text" />
+		<input type="submit" value="Buscar" />
+		
+		<div>
+			<input id="tudo" checked="checked" name="searchFor" type="radio" value="A" />
+			<label for="tudo"><script>document.write(chrome.i18n.getMessage('tudo'));</script></label>
+			
+			<input id="usuarios" name="searchFor" type="radio" value="U" />
+			<label for="usuarios"><script>document.write(chrome.i18n.getMessage('usuarios'));</script></label>
+			
+			<input id="comunidades" name="searchFor" type="radio" value="C" />
+			<label for="comunidades"><script>document.write(chrome.i18n.getMessage('comunidades'));</script></label>
+			
+			<input id="topicos" name="searchFor" type="radio" value="F" />
+			<label for="topicos"><script>document.write(chrome.i18n.getMessage('topicos'));</script></label>
+			
+			<input id="amigos" name="searchFor" type="radio" value="M" />
+			<label for="amigos"><script>document.write(chrome.i18n.getMessage('meus_amigos'));</script></label>
+			
+			<div style="clear: both;"></div>
+		</div>
+	</form>
+	
+	<h1 class="aniversarios"><script>document.write(chrome.i18n.getMessage('aniversarios'));</script></h1>
+	<iframe src="http://www.orkut.com/MiniBirthday" class="aniversarios"></iframe>
+	<a href="http://www.google.com/calendar/render?cid=1%23orkut%40group.v.calendar.google.com" class="adicionar-agenda" target="_blank"><script>document.write(chrome.i18n.getMessage('adicionar_aniversarios_agenda'));</script></a>
+</body>
+</html>
