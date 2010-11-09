@@ -109,14 +109,14 @@ chrome.extension.onRequest.addListener(function(requisicao, remetente, resposta)
 	switch (requisicao.acao) {
 	case 'carregarAtualizacoes':
 		chrome.tabs.executeScript(null, {
-			code : orkutil.clicar('document.getElementsByClassName("demoStream")[0].childNodes[0]');
-			_gaq.push( [ '_trackEvent', 'Botões', 'clicked', 'Carregar atualizações');
+			code : orkutil.clicar('document.getElementsByClassName("demoStream")[0].childNodes[0]')
 		});
+		_gaq.push( [ '_trackEvent', 'Botões', 'clicked', 'Carregar atualizações'] )
 		break;
 
 	case 'carregarMaisAtualizacoes':
 		chrome.tabs.executeScript(null, {
-			code : orkutil.clicar('document.getElementsByClassName("demoStream")[0].childNodes[2]');
+			code : orkutil.clicar('document.getElementsByClassName("demoStream")[0].childNodes[2]')
 		});
 		break;
 
