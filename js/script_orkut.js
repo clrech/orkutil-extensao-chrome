@@ -9,8 +9,8 @@ var orkutil = {
 	atalhos : [ [ 'aplicativos', 'AppDirectory', 'paginas' ], [ 'comunidades', 'Communities', 'paginas' ], [ 'depoimentos', 'ProfileT', 'paginas' ], [ 'eventos', 'Events', 'paginas' ],
 			[ 'fotos', 'AlbumList', 'paginas' ], [ 'fotos_junto', 'PhotoTag', 'paginas' ], [ 'grupos', 'GroupsManagement', 'paginas' ], [ 'home', 'Home', 'paginas' ],
 			[ 'mensagens', 'Messages', 'paginas' ], [ 'configuracoes', 'GeneralSettings', 'paginas' ], [ 'perfil', 'Profile', 'paginas' ], [ 'promova', 'Promote', 'paginas' ],
-			[ 'recados', 'Scrapbook', 'paginas' ], [ 'perfil_completo', 'FullProfile', 'paginas' ], [ 'proximo', '', 'navegacao' ], [ 'anterior', '', 'navegacao' ], [ 'ajuda', '', 'navegacao' ],
-			[ '.', '', 'atualizar_topo' ] ]
+			[ 'recados', 'Scrapbook', 'paginas' ], [ 'perfil_completo', 'FullProfile', 'paginas' ], [ 'escrever', '', 'navegacao' ], [ 'proximo', '', 'navegacao' ], [ 'anterior', '', 'navegacao' ],
+			[ 'ajuda', '', 'navegacao' ], [ 'atualizar_topo', '', 'navegacao' ] ]
 };
 
 for (i in orkutil.atalhos) {
@@ -19,54 +19,50 @@ for (i in orkutil.atalhos) {
 
 log(orkutil);
 
-orkutil.carregar = function() {
-	log('orkutil.carregar()');
-	$('.rightColumnLayout > div').each(function(indice, elemento) {
-		if ($(elemento).find('a[href*=Profile]').size() > 0) {
-			log('orkutil.carregar(): Criando imagem de zoom-in nas miniaturas');
+orkutil.criarBotoesCaixas = function() {
+	log('orkutil.criarBotoesCaixas()');
+
+	if ($('.rightColumnLayout > div .zoom').size() == 0) {
+		$('.rightColumnLayout > div').each(function(indice, elemento) {
+			if ($(elemento).find('a[href*=Profile]').size() > 0) {
+				log('orkutil.carregar(): Criando imagem de zoom-in nas miniaturas');
+				$(document.createElement('img')).attr( {
+					class : 'zoom',
+					src : chrome.extension.getURL('img/icones/zoom-in.png'),
+					title : chrome.i18n.getMessage('aumentar_fotos')
+				}).prependTo($(elemento).find('.themePrimaryBackgroundColor')).click( {
+					caixa : elemento
+				}, function(evento) {
+					if (evento.data.caixa) {
+						$(evento.data.caixa).find('.themePrimaryBackgroundColor').parent().addClass('miniatura-maior');
+					}
+					orkutil.aumentarMiniaturas();
+				});
+
+				log('orkutil.carregar(): Criando imagem de zoom-out nas miniaturas');
+				$(document.createElement('img')).attr( {
+					class : 'zoom',
+					src : chrome.extension.getURL('img/icones/zoom-out.png'),
+					title : chrome.i18n.getMessage('diminuir_fotos')
+				}).prependTo($(elemento).find('.themePrimaryBackgroundColor')).click(orkutil.diminuirMiniaturas);
+			}
+
+			log('orkutil.carregar(): Criando imagem de tela cheia');
 			$(document.createElement('img')).attr( {
 				class : 'zoom',
-				src : chrome.extension.getURL('img/icones/zoom-in.png'),
-				title : chrome.i18n.getMessage('aumentar_fotos')
+				src : chrome.extension.getURL('img/icones/tela-cheia.png'),
+				title : chrome.i18n.getMessage('tela_cheia')
 			}).prependTo($(elemento).find('.themePrimaryBackgroundColor')).click( {
 				caixa : elemento
-			}, function(evento) {
-				if (evento.data.caixa) {
-					$(evento.data.caixa).find('.themePrimaryBackgroundColor').parent().addClass('miniatura-maior');
-				}
-				orkutil.aumentarMiniaturas();
-			});
+			}, orkutil.telaCheia);
+		});
+	}
+};
 
-			log('orkutil.carregar(): Criando imagem de zoom-out nas miniaturas');
-			$(document.createElement('img')).attr( {
-				class : 'zoom',
-				src : chrome.extension.getURL('img/icones/zoom-out.png'),
-				title : chrome.i18n.getMessage('diminuir_fotos')
-			}).prependTo($(elemento).find('.themePrimaryBackgroundColor')).click(orkutil.diminuirMiniaturas);
-		}
-
-		log('orkutil.carregar(): Criando imagem de tela cheia');
-		$(document.createElement('img')).attr( {
-			class : 'zoom',
-			src : chrome.extension.getURL('img/icones/tela-cheia.png'),
-			title : chrome.i18n.getMessage('tela_cheia')
-		}).prependTo($(elemento).find('.themePrimaryBackgroundColor')).click( {
-			caixa : elemento
-		}, orkutil.telaCheia);
-	});
-
-	$('.themeDesktopColor').scroll(function() {
-		var docViewTop = $('.themeDesktopColor').scrollTop();
-		var docViewBottom = docViewTop + $('.themeDesktopColor').height();
-
-		var elemTop = $($($('.demoStream > div')[1])).offset().top;
-		var elemBottom = elemTop + $($($('.demoStream > div')[1])).height();
-
-		if ((elemBottom >= docViewTop) && (elemTop <= docViewBottom)) {
-			orkutil.carregarMaisAtualizacoes();
-		}
-	});
-
+orkutil.carregar = function() {
+	log('orkutil.carregar()');
+	orkutil.criarBotoesCaixas();
+	window.setTimeout(orkutil.verificarAtualizacoes, 1000);
 	$('.demoStream div > div:visible:first').addClass('stream-selecionada');
 };
 
@@ -98,11 +94,11 @@ orkutil.carregarMaisAtualizacoes = function() {
 
 orkutil.irParaTopo = function() {
 	$('.themeDesktopColor').animate( {
-		scrollTop : $('.demoStream > a').attr('offsetTop')
+		scrollTop : 270
 	}, 0);
 
 	window.setTimeout(function() {
-		$('stream-selecionada').removeClass('stream-selecionada');
+		$('.stream-selecionada').removeClass('stream-selecionada');
 		$('.demoStream div > div:visible:first').addClass('stream-selecionada');
 	}, 2000);
 };
@@ -110,7 +106,7 @@ orkutil.irParaTopo = function() {
 orkutil.irParaNovasAtualizacoes = function() {
 	log('orkut.irParaNovasAtualizacoes()');
 	$('.themeDesktopColor').animate( {
-		scrollTop : $('.demoStream > a').attr('offsetTop')
+		scrollTop : 270
 	}, 0);
 
 	orkutil.carregarAtualizacoes();
@@ -118,7 +114,7 @@ orkutil.irParaNovasAtualizacoes = function() {
 };
 
 orkutil.verificarAtualizacoes = function() {
-	log('orkutil.verificarAtualizacoes()');
+	// log('orkutil.verificarAtualizacoes()');
 	if ($('.demoStream > a').is(':visible')) {
 		if ($('.themeDesktopColor').scrollTop() > 400) {
 			$('.demoStream > a').addClass('novas-atualizacoes');
@@ -129,7 +125,6 @@ orkutil.verificarAtualizacoes = function() {
 			});
 		}
 
-		log('orkutil.notificado=' + orkutil.notificado);
 		if (!orkutil.notificado) {
 			log('chamando notificacao');
 			orkutil.acao('notificarAtualizacoes');
@@ -139,11 +134,14 @@ orkutil.verificarAtualizacoes = function() {
 		$('.demoStream > a').removeClass('novas-atualizacoes');
 	}
 
-	window.setTimeout(orkutil.verificarAtualizacoes, 2000);
-};
+	if ($($('.demoStream > div')[1]).offset()) {
+		if (($(window).height() - $($('.demoStream > div')[1]).offset().top) > -500) {
+			orkutil.carregarMaisAtualizacoes();
+		}
+	}
 
-window.setTimeout(orkutil.verificarAtualizacoes, 2000);
-window.setTimeout(orkutil.carregou, 1000);
+	window.setTimeout(orkutil.verificarAtualizacoes, 1000);
+};
 
 orkutil.telaCheia = function(evento) {
 	log('orkutil.telaCheia()');
@@ -173,7 +171,7 @@ orkutil.telaCheia = function(evento) {
 		}
 	});
 
-	$('.tela-cheia input[class][type=text]:first').focus().select();
+	// $('.tela-cheia input[class][type=text]:first').focus().select();
 	orkutil.verificarTamanhoMiniaturas(false);
 	_gaq.push( [ '_trackEvent', 'Botões', 'clicked', 'Tela cheia' ]);
 };
@@ -235,13 +233,21 @@ orkutil.scrollMiniaturas = function() {
 	}
 }
 
-$('.themeDesktopColor').scroll(function() {
-	if ($('.demoStream > div:nth-child(3)').offset().top < $(window).height()) {
-		$('.demoStream > div:nth-child(3)').click();
+orkutil.keyup = function(evento) {
+	if (evento.keyCode == 27) {
+		// ESC
+		$('.tela-cheia').toggleClass('tela-cheia');
+		$('.caixa-post-modal').removeClass('themeDarkTransparency');
+		$('.caixa-post-modal').removeClass('caixa-post-modal');
+		$('#atalhos').hide();
 	}
-});
+}
 
 orkutil.keypress = function(evento) {
+	if (evento.target.tagName == 'INPUT') {
+		return false;
+	}
+
 	var tecla = String.fromCharCode(evento.keyCode).toUpperCase();
 	var tempo = (new Date()).getTime() - orkutil.teclaG;
 
@@ -270,11 +276,45 @@ orkutil.keypress = function(evento) {
 	case 'K':
 		orkutil.navegar(false);
 		break;
+	case 'N':
+		orkutil.exibirCaixaPostagem();
+		break;
 	case '.':
 		orkutil.irParaNovasAtualizacoes();
 		break;
+//	case 'T':
+//		orkutil.testar();
+//		break;
 	}
 };
+
+orkutil.exibirCaixaPostagem = function() {
+	log('orkutil.exibirCaixaPostagem()');
+	if ($('.fechar-caixa-post-modal').size() == 0) {
+		$(document.createElement('div')).attr( {
+			class : 'fechar-caixa-post-modal',
+			css : '',
+			title : chrome.i18n.getMessage('fechar')
+		}).css('backgroundImage', 'url("' + chrome.extension.getURL('img/icones/fechar.png') + '")').click(function() {
+			$('.demoHomePostBox').toggleClass('caixa-post-modal themeDarkTransparency');
+			log('Fechando...');
+		}).appendTo('.demoHomePostBox');
+
+		$('.demoPostButton').click(function() {
+			$('.demoHomePostBox').toggle();
+			log('Cancelando...');
+		});
+
+		$('.demoPostButton').prev(function() {
+			$('.demoHomePostBox').toggle();
+			log('Cancelando...');
+		});
+
+		$('.demoHomePostBox').toggleClass('caixa-post-modal themeDarkTransparency');
+	} else {
+		$('.demoHomePostBox').toggleClass('caixa-post-modal themeDarkTransparency');
+	}
+}
 
 orkutil.navegar = function(proximo) {
 	log('orkutil.navegar()');
@@ -312,10 +352,14 @@ orkutil.onpopstate = function(event) {
 	$('.tela-cheia div[style*=overflow]').height(orkutil.alturaCaixa);
 	$('.tela-cheia').removeClass('tela-cheia');
 
-	window.setTimeout(orkutil.verificarTamanhoMiniaturas, 3000);
-	if ($('.stream-selecionada').size() == 0) {
-		$('.demoStream div > div:first').addClass('stream-selecionada');
-	}
+	window.setTimeout(function() {
+		orkutil.criarBotoesCaixas();
+		orkutil.verificarTamanhoMiniaturas;
+
+		if ($('.stream-selecionada').size() == 0) {
+			$('.demoStream div > div:first').addClass('stream-selecionada');
+		}
+	}, 3000);
 };
 
 orkutil.exibirAtalhos = function() {
@@ -331,15 +375,15 @@ orkutil.exibirAtalhos = function() {
 	var atalhosPaginas = [];
 	var atalhosNavegacao = [];
 
-	_atalhos.push('<div id="atalhos"><div>');
+	_atalhos.push('<div id="atalhos"><div class="themeDarkTransparency">');
 	_atalhos.push('<h3>' + chrome.i18n.getMessage('atalhos') + '</h3>');
 	_atalhos.push('<div>');
 
 	for ( var i in orkutil.atalhos) {
 		var tecla = chrome.i18n.getMessage('atalho_' + orkutil.atalhos[i][0]).toLowerCase();
 		var descricao = chrome.i18n.getMessage(orkutil.atalhos[i][0]);
-		descricao = descricao.toLowerCase().replace(tecla.toLowerCase(), '<u>' + tecla + '</u>');
-		descricao = descricao[0].toUpperCase() + descricao.substr(1, descricao.length);
+		descricao = descricao.toLowerCase();
+		descricao = descricao.replace(tecla.toLowerCase(), '<u>' + tecla.toLowerCase() + '</u>');
 
 		var temp = [];
 		temp.push('<dl>');
@@ -364,14 +408,36 @@ orkutil.exibirAtalhos = function() {
 		title : chrome.i18n.getMessage('fechar')
 	}).click(orkutil.exibirAtalhos).prependTo('#atalhos > div').append('x');
 
-	$('#atalhos > div').css('backgroundColor', $('.themePrimaryBackgroundColor:first').css('backgroundColor'));
 	$('#atalhos > div').css('marginTop', (($(window).height() - $('#atalhos > div').height()) / 2) + 'px');
 	_gaq.push( [ '_trackEvent', 'Atalhos', 'clicked', 'Exibir' ]);
 };
 
 $(window).resize(orkutil.resize);
 $(document).keypress(orkutil.keypress);
+$(document).keyup(orkutil.keyup);
 window.onpopstate = orkutil.onpopstate;
+window.setTimeout(orkutil.carregou, 1000);
+
+orkutil.testar = function() {
+	console.log('orkutil.testar');
+
+	window.setTimeout(orkutil.exibirAtalhos, 1000);
+	window.setTimeout(orkutil.exibirAtalhos, 3000);
+	window.setTimeout(function(){orkutil.navegar(true)}, 5000);
+	window.setTimeout(function(){orkutil.navegar(true)}, 6000);
+	window.setTimeout(function(){orkutil.navegar(false)}, 7000);
+	window.setTimeout(orkutil.exibirCaixaPostagem, 10000);
+	window.setTimeout(orkutil.exibirCaixaPostagem, 12000);
+
+	window.setTimeout(function() {
+		$('.themeDesktopColor').animate( {
+			scrollTop : $('.themeDesktopColor').attr('scrollHeight')
+		}, 0);
+		$('.demoStream a:first').show();
+
+		window.setTimeout(orkutil.irParaNovasAtualizacoes, 5000);
+	}, 15000);
+}
 
 function log(s) {
 	if (orkutil.log) {

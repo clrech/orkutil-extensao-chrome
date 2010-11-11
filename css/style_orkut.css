@@ -32,7 +32,7 @@
 }
 #atalhos > div {
 	background-color: #000;
-	border-radius: 10px;
+	border-radius: 5px;
 	height: 380px;
 	margin: auto;
 	width: 500px;
@@ -114,4 +114,30 @@
 	text-decoration: none;
 	top: 0px;
 	z-index: 1000;
+}
+.caixa-post-modal {
+	border: 1px solid black;
+	padding: 0px;
+	position: fixed;
+	top: 40%;
+	width: 525px !important;
+	z-index: 100;
+}
+.caixa-post-modal > div {
+	background-color: #FFF;
+	padding: 0px 10px;
+}
+.caixa-post-modal > div:last {
+	padding: 5px 10px;
+}
+.caixa-post-modal .fechar-caixa-post-modal {
+	background-repeat: no-repeat;
+	cursor: pointer;
+	float: right;
+	height: 16px;
+	padding: 0px;
+	position: absolute;
+	right: 15px;
+	top: 18px;
+	width: 16px;
 }

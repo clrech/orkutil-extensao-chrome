@@ -35,6 +35,9 @@
 	"atalho_aplicativos" : {
 		"message" : "A"
 	},
+	"atalho_atualizar_topo" : {
+		"message" : "."
+	},
 	"atalho_buscar" : {
 		"message" : "/"
 	},
@@ -47,14 +50,17 @@
 	"atalho_depoimentos" : {
 		"message" : "D"
 	},
-	"atalho_eventos" : {
+	"atalho_escrever" : {
 		"message" : "E"
+	},
+	"atalho_eventos" : {
+		"message" : "V"
 	},
 	"atalho_fotos" : {
 		"message" : "F"
 	},
 	"atalho_fotos_junto" : {
-		"message" : "N"
+		"message" : "T"
 	},
 	"atalho_grupos" : {
 		"message" : "G"
@@ -121,6 +127,9 @@
 	},
 	"enviar_cantada" : {
 		"message" : "Enviar nota seductora"
+	},
+	"escrever" : {
+		"message" : "Escribir"
 	},
 	"eventos" : {
 		"message" : "Eventos"
