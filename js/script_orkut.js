@@ -244,8 +244,8 @@ orkutil.keyup = function(evento) {
 }
 
 orkutil.keypress = function(evento) {
-	if (evento.target.tagName == 'INPUT') {
-		return false;
+	if (evento.target.tagName == 'INPUT' || evento.target.tagName == 'TEXTAREA') {
+		return true;
 	}
 
 	var tecla = String.fromCharCode(evento.keyCode).toUpperCase();
